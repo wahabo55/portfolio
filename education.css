@@ -1,0 +1,489 @@
+/*
+  - Subtle Radial Glow
+  - No AOS
+  - White GPA
+*/
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #000;
+    color: #fff;
+}
+
+.accordion-section {
+    padding: clamp(120px, 18vh, 160px) clamp(10px, 2vw, 20px) clamp(40px, 8vh, 80px); /* Increased top padding for gap from header */
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%; /* Ensure full width on mobile */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center vertically on mobile */
+}
+
+.accordion-header {
+    text-align: center;
+    margin-bottom: clamp(20px, 4vw, 60px); /* Reduced min margin for mobile */
+    width: 100%; /* Ensure full width */
+}
+
+.accordion-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 6vw, 48px); /* Dynamic font size for mobile/tablet */
+    font-weight: 700;
+    margin-bottom: clamp(8px, 1.5vw, 12px); /* Reduced min margin for mobile */
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.accordion-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(14px, 2vw, 16px); /* Dynamic font size for mobile/tablet */
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.accordion-card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 16px;
+    margin-bottom: clamp(20px, 3vw, 30px); /* Increased breathing space for mobile, inspired by Work section */
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    width: clamp(300px, 90vw, 350px); /* Uniform width inspired by Work section mobile cards */
+    max-width: 1000px; /* Limit width on desktop */
+    height: clamp(120px, 15vw, 150px); /* Uniform height inspired by Work section mobile cards */
+}
+
+.accordion-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at top left,
+        var(--accent-glow) 0%,
+        transparent 70%
+    );
+    z-index: 0;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+}
+
+.accordion-card:hover {
+    transform: translateY(-4px);
+    background: var(--card-hover);
+    box-shadow: 0 12px 30px var(--shadow-color);
+}
+
+.accordion-card:hover::before {
+    opacity: 1;
+}
+
+.accordion-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(12px, 1.5vw, 16px) clamp(16px, 2.5vw, 24px); /* Reduced min padding for mobile */
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    height: 100%; /* Ensure full height for uniform cards */
+    /* Ensure touch events work on mobile */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+    touch-action: manipulation; /* Improve touch responsiveness */
+    z-index: 1001; /* Ensure above any potential overlays */
+}
+
+.institution-info {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 16px); /* Reduced min gap for mobile */
+}
+
+.institution-logo {
+    width: clamp(30px, 4vw, 40px); /* Dynamic size for mobile/tablet */
+    height: clamp(30px, 4vw, 40px);
+    object-fit: contain;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: clamp(2px, 0.5vw, 4px); /* Reduced min padding for mobile */
+    border: 1px solid var(--border-color);
+}
+
+.institution-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(16px, 2.5vw, 20px); /* Dynamic font size for mobile/tablet */
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0; /* Remove default margin for alignment */
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 12px); /* Reduced gap for mobile */
+}
+
+.date-range {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: clamp(12px, 1.5vw, 14px); /* Dynamic font size for mobile/tablet */
+    color: var(--text-secondary);
+}
+
+.accordion-toggle {
+    font-size: clamp(12px, 1.5vw, 14px); /* Reduced font size for smaller, cleaner look on mobile */
+    color: #ffffff;
+    background: var(--accent-color);
+    width: clamp(20px, 2.5vw, 24px); /* Reduced size for mobile, fixed for consistent shape */
+    height: clamp(20px, 2.5vw, 24px); /* Reduced size for mobile, fixed for consistent shape */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(122, 89, 254, 0.2);
+    cursor: pointer; /* Ensure cursor is pointer on mobile */
+    line-height: 1; /* Ensure icon fits neatly within container */
+    /* Fix Font Awesome icon rendering */
+    -webkit-font-smoothing: antialiased; /* Improve rendering on mobile */
+    -moz-osx-font-smoothing: grayscale; /* Improve rendering on mobile */
+}
+
+.accordion-card.active .accordion-toggle {
+    transform: rotate(135deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    padding: 0 clamp(16px, 2.5vw, 28px); /* Reduced min padding for mobile */
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(14px, 2vw, 15px); /* Dynamic font size for mobile/tablet */
+    line-height: 1.6;
+    color: var(--text-secondary);
+    /* Ensure content is visible and tappable on mobile */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    z-index: 1000; /* Ensure above any potential overlays */
+}
+
+.accordion-card.active .accordion-content {
+    padding: 0 clamp(16px, 2.5vw, 28px) clamp(16px, 2.5vw, 28px); /* Reduced min padding for mobile */
+    max-height: 1200px;
+}
+
+.location {
+    color: var(--text-secondary);
+    margin-bottom: clamp(6px, 1vw, 8px); /* Reduced min margin for mobile */
+    font-size: clamp(12px, 1.5vw, 14px); /* Dynamic font size for mobile/tablet */
+}
+
+.degree {
+    margin: 0 0 clamp(16px, 2vw, 20px) 0; /* Reduced min margin for mobile */
+    font-size: clamp(15px, 2vw, 17px); /* Dynamic font size for mobile/tablet */
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.gpa-inline {
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.accordion-content h4 {
+    margin-top: clamp(16px, 2vw, 20px); /* Reduced min margin for mobile */
+    margin-bottom: clamp(8px, 1.5vw, 12px); /* Reduced min margin for mobile */
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(14px, 2vw, 16px); /* Dynamic font size for mobile/tablet */
+}
+
+.accordion-content ul {
+    margin-left: clamp(16px, 2vw, 20px); /* Reduced min margin for mobile */
+    margin-bottom: clamp(8px, 1.5vw, 12px); /* Reduced min margin for mobile */
+    list-style-type: disc;
+}
+
+.accordion-content li {
+    margin-bottom: clamp(6px, 1vw, 8px); /* Reduced min margin for mobile */
+    color: var(--text-secondary);
+    padding-left: clamp(6px, 1vw, 8px); /* Reduced min padding for mobile */
+}
+
+/* Animations */
+.accordion-card {
+    transform-origin: center;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+.accordion-card:nth-child(1) { animation-delay: 0.1s; }
+.accordion-card:nth-child(2) { animation-delay: 0.2s; }
+.accordion-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .accordion-section {
+        padding: clamp(60px, 10vh, 120px) clamp(10px, 2vw, 20px) clamp(30px, 6vh, 60px);
+    }
+
+    .accordion-header {
+        margin-bottom: clamp(16px, 3vw, 40px);
+    }
+
+    .accordion-card {
+        margin-bottom: clamp(20px, 3vw, 30px); /* Increased breathing space for tablets */
+        width: clamp(280px, 85vw, 900px);
+        height: clamp(120px, 14vw, 140px); /* Uniform height for tablets, inspired by Work section */
+    }
+
+    .accordion-card-header {
+        padding: clamp(14px, 2vw, 16px) clamp(18px, 2.5vw, 24px);
+    }
+
+    .institution-logo {
+        width: clamp(28px, 3.5vw, 38px);
+        height: clamp(28px, 3.5vw, 38px);
+        padding: clamp(2px, 0.4vw, 3px);
+    }
+
+    .institution-info h3 {
+        font-size: clamp(15px, 2vw, 18px);
+    }
+
+    .header-right {
+        gap: clamp(10px, 1.5vw, 18px);
+    }
+
+    .date-range {
+        font-size: clamp(11px, 1.5vw, 13px);
+    }
+
+    .accordion-toggle {
+        width: clamp(26px, 3.5vw, 34px); /* Adjusted for tablets */
+        height: clamp(26px, 3.5vw, 34px);
+        font-size: clamp(14px, 2vw, 16px); /* Adjusted for tablets */
+        line-height: 1; /* Ensure icon fits neatly */
+        -webkit-font-smoothing: antialiased; /* Improve rendering */
+        -moz-osx-font-smoothing: grayscale; /* Improve rendering */
+    }
+
+    .accordion-content {
+        padding: 0 clamp(18px, 2.5vw, 24px);
+    }
+
+    .accordion-card.active .accordion-content {
+        padding: 0 clamp(18px, 2.5vw, 24px) clamp(18px, 2.5vw, 24px);
+    }
+
+    .location {
+        margin-bottom: clamp(5px, 1vw, 7px);
+        font-size: clamp(11px, 1.5vw, 13px);
+    }
+
+    .degree {
+        margin-bottom: clamp(14px, 2vw, 18px);
+        font-size: clamp(14px, 2vw, 16px);
+    }
+
+    .accordion-content h4 {
+        margin-top: clamp(14px, 2vw, 18px);
+        margin-bottom: clamp(7px, 1.2vw, 10px);
+        font-size: clamp(13px, 1.8vw, 15px);
+    }
+
+    .accordion-content ul {
+        margin-left: clamp(14px, 2vw, 18px);
+        margin-bottom: clamp(7px, 1.2vw, 10px);
+    }
+
+    .accordion-content li {
+        margin-bottom: clamp(5px, 1vw, 7px);
+        padding-left: clamp(5px, 1vw, 7px);
+    }
+}
+
+@media (min-width: 769px) {
+    /* No changes to desktop/tablet layout to preserve the current design */
+    .accordion-section {
+        padding: clamp(80px, 12vh, 160px) clamp(10px, 2vw, 20px) clamp(40px, 8vh, 80px);
+    }
+
+    .accordion-header {
+        margin-bottom: clamp(20px, 4vw, 60px);
+    }
+
+    .accordion-card {
+        margin-bottom: clamp(16px, 2vw, 24px);
+        width: clamp(300px, 90vw, 1000px);
+        max-width: 1000px;
+        height: auto; /* Allow dynamic height on desktop */
+    }
+
+    .accordion-card-header {
+        padding: clamp(16px, 2vw, 24px) clamp(20px, 3vw, 28px);
+    }
+
+    .institution-logo {
+        width: clamp(30px, 4vw, 40px);
+        height: clamp(30px, 4vw, 40px);
+        padding: clamp(2px, 0.5vw, 4px);
+    }
+
+    .institution-info h3 {
+        font-size: clamp(16px, 2.5vw, 20px);
+    }
+
+    .header-right {
+        gap: clamp(12px, 2vw, 20px);
+    }
+
+    .date-range {
+        font-size: clamp(12px, 1.5vw, 14px);
+    }
+
+    .accordion-toggle {
+        width: clamp(28px, 4vw, 36px);
+        height: clamp(28px, 4vw, 36px);
+        font-size: clamp(14px, 2vw, 18px);
+        line-height: 1; /* Ensure icon fits neatly */
+        -webkit-font-smoothing: antialiased; /* Improve rendering */
+        -moz-osx-font-smoothing: grayscale; /* Improve rendering */
+    }
+
+    .accordion-content {
+        padding: 0 clamp(20px, 3vw, 28px);
+    }
+
+    .accordion-card.active .accordion-content {
+        padding: 0 clamp(20px, 3vw, 28px) clamp(20px, 3vw, 28px);
+    }
+
+    .location {
+        margin-bottom: clamp(6px, 1vw, 8px);
+        font-size: clamp(12px, 1.5vw, 14px);
+    }
+
+    .degree {
+        margin-bottom: clamp(16px, 2vw, 20px);
+        font-size: clamp(15px, 2vw, 17px);
+    }
+
+    .accordion-content h4 {
+        margin-top: clamp(16px, 2vw, 20px);
+        margin-bottom: clamp(8px, 1.5vw, 12px);
+        font-size: clamp(14px, 2vw, 16px);
+    }
+
+    .accordion-content ul {
+        margin-left: clamp(16px, 2vw, 20px);
+        margin-bottom: clamp(8px, 1.5vw, 12px);
+    }
+
+    .accordion-content li {
+        margin-bottom: clamp(6px, 1vw, 8px);
+        padding-left: clamp(6px, 1vw, 8px);
+    }
+}
+
+@media (max-width: 480px) {
+    .accordion-section {
+        padding: clamp(100px, 15vh, 140px) clamp(8px, 1.5vw, 16px) clamp(15px, 4vh, 40px); /* Adjusted top padding for very small screens */
+    }
+
+    .accordion-header {
+        margin-bottom: clamp(10px, 1.5vw, 20px);
+    }
+
+    .accordion-header h2 {
+        font-size: clamp(24px, 4vw, 32px);
+    }
+
+    .accordion-card {
+        margin-bottom: clamp(20px, 3vw, 30px); /* Increased breathing space for very small screens */
+        width: clamp(280px, 90vw, 350px); /* Uniform width for very small screens, inspired by Work section */
+        height: auto;
+    }
+
+    .accordion-card-header {
+        padding: clamp(10px, 1.2vw, 14px) clamp(14px, 1.5vw, 20px);
+    }
+
+    .institution-logo {
+        width: clamp(24px, 2.5vw, 34px);
+        height: clamp(24px, 2.5vw, 34px);
+        padding: clamp(1px, 0.2vw, 2px);
+    }
+
+    .institution-info h3 {
+        font-size: clamp(13px, 1.8vw, 15px);
+    }
+
+    .header-right {
+        gap: clamp(6px, 1vw, 12px);
+    }
+
+    .date-range {
+        font-size: clamp(9px, 1vw, 11px);
+    }
+
+    .accordion-toggle {
+        width: clamp(18px, 2vw, 22px); /* Further reduced size for very small screens */
+        height: clamp(18px, 2vw, 22px); /* Further reduced size for very small screens */
+        font-size: clamp(10px, 1.2vw, 12px); /* Further reduced font size */
+        line-height: 1; /* Ensure icon fits neatly */
+        -webkit-font-smoothing: antialiased; /* Improve rendering */
+        -moz-osx-font-smoothing: grayscale; /* Improve rendering */
+    }
+
+    .accordion-content {
+        padding: 0 clamp(14px, 1.5vw, 20px);
+    }
+
+    .accordion-card.active .accordion-content {
+        padding: 0 clamp(14px, 1.5vw, 20px) clamp(14px, 1.5vw, 20px);
+    }
+
+    .location {
+        margin-bottom: clamp(3px, 0.6vw, 5px);
+        font-size: clamp(9px, 1vw, 11px);
+    }
+
+    .degree {
+        margin-bottom: clamp(10px, 1.2vw, 14px);
+        font-size: clamp(12px, 1.5vw, 15px);
+    }
+
+    .accordion-content h4 {
+        margin-top: clamp(10px, 1.2vw, 14px);
+        margin-bottom: clamp(5px, 0.8vw, 8px);
+        font-size: clamp(11px, 1.2vw, 13px);
+    }
+
+    .accordion-content ul {
+        margin-left: clamp(10px, 1.2vw, 14px);
+        margin-bottom: clamp(5px, 0.8vw, 8px);
+    }
+
+    .accordion-content li {
+        margin-bottom: clamp(3px, 0.6vw, 5px);
+        padding-left: clamp(3px, 0.6vw, 5px);
+    }
+}

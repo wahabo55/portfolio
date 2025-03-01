@@ -1,0 +1,629 @@
+/* Add these animation keyframes at the start of your CSS file */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add these classes to your existing CSS */
+.timeline-item {
+    /* ... existing styles ... */
+    opacity: 0;
+    animation: fadeSlideUp 0.6s ease forwards;
+}
+
+/* Sequential animation delays for each card */
+.timeline-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.timeline-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.timeline-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.timeline-item:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+/* Animate the timeline line */
+.timeline-line {
+    /* ... existing styles ... */
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left;
+    animation: expandLine 1s ease forwards;
+    animation-delay: 0.1s;
+}
+
+@keyframes expandLine {
+    0% {
+        transform: translateY(-50%) scaleX(0);
+    }
+    100% {
+        transform: translateY(-50%) scaleX(1);
+    }
+}
+
+/* work.css */
+.main-wrapper {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.work-section {
+    padding: clamp(60px, 12vh, 100px) clamp(10px, 2vw, 20px) clamp(40px, 8vh, 80px); /* Dynamic padding for mobile/tablet */
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    min-height: calc(100vh - 80px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the entire section vertically */
+}
+
+.work-header {
+    text-align: center;
+    margin-bottom: clamp(30px, 6vw, 60px); /* Reduced min margin for mobile */
+    width: 100%; /* Ensure full width */
+}
+
+.work-header h1 {
+    padding-top: clamp(20px, 4vw, 40px); /* Reduced min padding for mobile */
+    font-size: clamp(32px, 6vw, 48px); /* Dynamic font size for mobile/tablet */
+    font-weight: 700;
+    margin-bottom: clamp(10px, 2vw, 20px); /* Reduced min margin for mobile */
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.work-header p {
+    color: var(--text-secondary);
+    font-size: clamp(14px, 2vw, 16px); /* Dynamic font size for mobile/tablet */
+}
+
+.timeline-container {
+    position: relative;
+    padding: clamp(10px, 0vw, 20px) 0; /* Reduced padding for tighter layout on desktop (comment: Reducing space between "Work Experience" and cards on laptop screen) */
+    margin-top: clamp(10px, 2vw, 20px); /* Reduced margin for tighter layout on desktop */
+    background: var(--bg-primary);
+    overflow: visible;
+    width: 100%;
+    max-width: 1400px; /* Limit width on desktop */
+    display: flex;
+    justify-content: center; /* Center timeline on desktop */
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: clamp(20px, 20vw, 70px); /* Start at first card */
+    right: clamp(20px, 4vw, 70px); /* End at last card (comment: Removing start/end points of the timeline line on desktop/laptop) */
+    height: 2px; /* Horizontal line for desktop/tablet */
+    background: var(--accent-color); /* Purple line */
+    transform: translateY(-50%);
+}
+
+.timeline-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    gap: clamp(20px, 4vw, 40px); /* Reduced min gap for mobile */
+    padding: 0 clamp(20px, 4vw, 60px); /* Reduced min padding for mobile */
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%; /* Ensure full width */
+}
+
+.timeline-item {
+    position: relative;
+    flex: 1;
+    min-width: clamp(200px, 25vw, 250px); /* Adjusted for better mobile spacing */
+    max-width: clamp(250px, 30vw, 300px); /* Adjusted for better mobile spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeline-item:nth-child(odd) .work-card {
+    margin-bottom: clamp(2px, 0vw, 10px); /* Reduced from 30px, 6vw, 60px */
+}
+
+.timeline-item:nth-child(even) .work-card {
+    margin-top: clamp(30px, 6vw, 60px); /* Reduced from 30px, 6vw, 60px */
+}
+
+/* Also adjust the date margin for further refinement */
+.timeline-date {
+    position: relative;
+    color: var(--text-secondary);
+    font-size: clamp(12px, 1.5vw, 0.75rem);
+    white-space: nowrap;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-top: clamp(4px, 1vw, 8px); /* Reduced from 8px, 1.5vw, 15px */
+    text-align: center;
+}
+
+.timeline-dot {
+    display: none; /* Remove dots across all devices for cleaner look (comment: Getting rid of the dots) */
+}
+
+.work-card {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: clamp(16px, 3vw, 24px); /* Reduced min padding for mobile */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    max-width: 100%; /* Ensure full width on mobile */
+    height: clamp(120px, 15vw, 150px); /* Uniform height for consistent card size on mobile */
+}
+
+.work-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at top left,
+        var(--card-hover),
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
+}
+
+.work-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-color: var(--border-color);
+}
+
+.work-card:hover::before {
+    opacity: 1;
+}
+
+.work-card-inner {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 1vw, 0.75rem); /* Reduced min gap for mobile */
+    position: relative;
+    z-index: 1;
+    height: 100%; /* Ensure content fills card height */
+    flex-direction: column; /* Stack content vertically on mobile for uniform size */
+    justify-content: center; /* Center content vertically */
+}
+
+.company-logo {
+    width: clamp(2rem, 4vw, 2.5rem); /* Dynamic size for mobile/tablet */
+    height: clamp(2rem, 4vw, 2.5rem);
+    flex-shrink: 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    padding: clamp(0.2rem, 0.5vw, 0.3rem); /* Reduced min padding for mobile */
+    background: var(--card-bg);
+}
+
+.company-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.company-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center text vertically on mobile */
+}
+
+.company-info h3 {
+    font-size: clamp(14px, 2vw, 0.9rem); /* Dynamic font size for mobile/tablet */
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: clamp(0.1rem, 0.5vw, 0.25rem); /* Reduced min margin for mobile */
+    text-align: center; /* Center text for aesthetic balance */
+}
+
+.company-info h4 {
+    font-size: clamp(12px, 1.5vw, 0.8rem); /* Dynamic font size for mobile/tablet */
+    color: var(--text-secondary);
+    margin-bottom: clamp(0.1rem, 0.5vw, 0.25rem); /* Reduced min margin for mobile */
+    line-height: 1.3;
+    text-align: center; /* Center text for aesthetic balance */
+}
+
+.expand-icon {
+    width: clamp(1rem, 1.5vw, 1.2rem); /* Reduced size for better aesthetics */
+    height: clamp(1rem, 1.5vw, 1.2rem); /* Reduced size for better aesthetics */
+    background: var(--button-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    color: var(--text-primary);
+    font-size: clamp(12px, 1.5vw, 8px); /* Reduced font size for + icon */
+}
+
+.work-card:hover .expand-icon {
+    background: var(--accent-color);
+    transform: rotate(45deg);
+}
+
+/* Modal Styles */
+.work-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-bg);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.work-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: clamp(300px, 90vw, 800px); /* Dynamic width for mobile/tablet */
+    max-width: 800px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.work-modal.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.modal-content {
+    padding: clamp(20px, 3vw, 32px); /* Reduced min padding for mobile */
+    background: var(--card-bg);
+    border-radius: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: clamp(16px, 2vw, 24px); /* Reduced min margin for mobile */
+    padding: 0;
+}
+
+.modal-company-info {
+    display: flex;
+    gap: clamp(10px, 2vw, 20px); /* Reduced min gap for mobile */
+    align-items: center;
+}
+
+.modal-company-info .modal-logo {
+    width: clamp(20px, 3vw, 30px); /* Dynamic size for mobile/tablet */
+    height: clamp(20px, 3vw, 30px);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: clamp(10px, 2vw, 16px); /* Reduced min margin for mobile */
+    margin-top: 0;
+    background: transparent;
+}
+
+.modal-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal-company-info div {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-company-info h2 {
+    font-size: clamp(20px, 3vw, 24px); /* Dynamic font size for mobile/tablet */
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: clamp(6px, 1vw, 8px); /* Reduced min margin for mobile */
+}
+
+.modal-company-info h3 {
+    font-size: clamp(14px, 2vw, 16px); /* Dynamic font size for mobile/tablet */
+    color: var(--text-secondary);
+    margin-bottom: clamp(6px, 1vw, 8px); /* Reduced min margin for mobile */
+}
+
+.modal-duration {
+    font-size: clamp(12px, 1.5vw, 14px); /* Dynamic font size for mobile/tablet */
+    color: var(--text-secondary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: clamp(24px, 3vw, 32px); /* Dynamic font size for mobile/tablet */
+    cursor: pointer;
+    padding: clamp(6px, 1vw, 8px); /* Reduced min padding for mobile */
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.achievements {
+    list-style: none;
+    padding: 0;
+}
+
+.achievements li {
+    color: var(--text-primary);
+    margin-bottom: clamp(12px, 2vw, 16px); /* Reduced min margin for mobile */
+    padding-left: clamp(16px, 3vw, 24px); /* Reduced min padding for mobile */
+    position: relative;
+    line-height: 1.6;
+    opacity: 0.9;
+    list-style-type: none;
+}
+
+.achievements li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: clamp(8px, 1.5vw, 10px); /* Reduced min top for mobile */
+    width: clamp(4px, 0.8vw, 6px); /* Dynamic size for mobile/tablet */
+    height: clamp(4px, 0.8vw, 6px);
+    background: var(--accent-color);
+    border-radius: 50%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .timeline-wrapper {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: clamp(20px, 4vw, 40px);
+        padding: 0 clamp(20px, 4vw, 60px) clamp(20px, 4vw, 20px);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+    }
+    
+    .timeline-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .timeline-item {
+        min-width: clamp(250px, 30vw, 280px);
+        flex: 0 0 auto;
+    }
+
+    .timeline-line {
+        left: clamp(20px, 4vw, 50px);
+        right: clamp(20px, 4vw, 50px);
+    }
+
+    .timeline-date {
+        margin-top: clamp(8px, 1.5vw, 15px); /* Ensure consistent dates */
+    }
+}
+
+@media (max-width: 768px) {
+    .work-section {
+        padding: clamp(50px, 10vh, 80px) clamp(10px, 2vw, 20px) clamp(30px, 6vh, 40px);
+    }
+
+    .work-header h1 {
+        font-size: clamp(28px, 5vw, 36px);
+    }
+
+    .timeline-container {
+        padding: clamp(15px, 3vw, 30px) 0;
+    }
+
+    /* Stack timeline vertically on mobile (no line) */
+    .timeline-wrapper {
+        flex-direction: column;
+        align-items: center; /* Center cards vertically on mobile */
+        gap: clamp(30px, 6vw, 40px);
+        padding: 0 clamp(10px, 2vw, 20px);
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    .timeline-line {
+        display: none; /* Hide timeline line on mobile */
+    }
+
+    .timeline-item {
+        min-width: clamp(250px, 90vw, 280px); /* Uniform width for all cards on mobile */
+        max-width: clamp(250px, 90vw, 280px); /* Uniform width for all cards on mobile */
+        flex: initial;
+        margin-left: 0; /* Remove offset since no line */
+        position: relative;
+    }
+
+    .timeline-item:nth-child(odd) .work-card,
+    .timeline-item:nth-child(even) .work-card {
+        margin: 0; /* Remove vertical margins for stacking */
+    }
+
+    .timeline-date {
+        margin-top: clamp(8px, 1.5vw, 15px); /* Ensure dates are below cards in chronological order */
+        text-align: center; /* Center-align dates for aesthetic balance */
+    }
+
+    .work-card {
+        padding: clamp(12px, 2vw, 16px);
+        height: clamp(120px, 15vw, 150px); /* Uniform height for consistent card size */
+    }
+
+    .work-card-inner {
+        flex-direction: column; /* Stack content vertically for uniform size */
+        justify-content: center; /* Center content vertically */
+        align-items: center; /* Center content horizontally */
+    }
+
+    .company-logo {
+        width: clamp(1.8rem, 3.5vw, 2rem);
+        height: clamp(1.8rem, 3.5vw, 2rem);
+        padding: clamp(0.15rem, 0.4vw, 0.2rem);
+    }
+
+    .company-info {
+        text-align: center; /* Center text for aesthetic balance */
+    }
+
+    .company-info h3 {
+        font-size: clamp(13px, 1.8vw, 0.85rem);
+    }
+
+    .company-info h4 {
+        font-size: clamp(11px, 1.5vw, 0.75rem);
+    }
+
+    .modal-content {
+        padding: clamp(16px, 2vw, 24px);
+    }
+
+    .modal-company-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(8px, 1.5vw, 10px);
+    }
+
+    .modal-logo {
+        margin-bottom: clamp(8px, 1.5vw, 12px);
+    }
+
+    .modal-company-info h2 {
+        font-size: clamp(18px, 2.5vw, 20px);
+    }
+
+    .modal-company-info h3 {
+        font-size: clamp(13px, 1.8vw, 14px);
+    }
+
+    .modal-duration {
+        font-size: clamp(11px, 1.5vw, 12px);
+    }
+
+    .modal-close {
+        font-size: clamp(20px, 2.5vw, 24px);
+    }
+
+    .achievements li {
+        font-size: clamp(13px, 1.8vw, 14px);
+        margin-bottom: clamp(10px, 1.5vw, 12px);
+        padding-left: clamp(14px, 2vw, 16px);
+    }
+
+    .achievements li::before {
+        width: clamp(3px, 0.6vw, 4px);
+        height: clamp(3px, 0.6vw, 4px);
+        top: clamp(6px, 1vw, 8px);
+    }
+}
+
+@media (max-width: 480px) {
+    .work-header h1 {
+        font-size: clamp(24px, 4vw, 32px);
+        padding-top: clamp(15px, 3vw, 30px);
+    }
+
+    .timeline-item {
+        min-width: clamp(200px, 90vw, 250px); /* Slightly smaller but uniform on very small screens */
+        max-width: clamp(200px, 90vw, 250px); /* Uniform width for all cards */
+    }
+
+    .work-card {
+        padding: clamp(10px, 1.5vw, 14px);
+        height: clamp(110px, 14vw, 140px); /* Slightly smaller height for very small screens */
+    }
+
+    .company-logo {
+        width: clamp(1.5rem, 3vw, 1.8rem);
+        height: clamp(1.5rem, 3vw, 1.8rem);
+        padding: clamp(0.1rem, 0.3vw, 0.15rem);
+    }
+
+    .company-info h3 {
+        font-size: clamp(12px, 1.5vw, 0.8rem);
+    }
+
+    .company-info h4 {
+        font-size: clamp(10px, 1.2vw, 0.7rem);
+    }
+
+    .timeline-date {
+        font-size: clamp(9px, 1vw, 10px);
+    }
+
+    .modal-content {
+        padding: clamp(14px, 1.5vw, 20px);
+    }
+
+    .modal-company-info h2 {
+        font-size: clamp(16px, 2vw, 18px);
+    }
+
+    .modal-company-info h3 {
+        font-size: clamp(12px, 1.5vw, 13px);
+    }
+
+    .modal-duration {
+        font-size: clamp(10px, 1.2vw, 11px);
+    }
+
+    .modal-close {
+        font-size: clamp(18px, 2vw, 20px);
+    }
+
+    .achievements li {
+        font-size: clamp(12px, 1.5vw, 13px);
+        margin-bottom: clamp(8px, 1vw, 10px);
+        padding-left: clamp(12px, 1.5vw, 14px);
+    }
+
+    .achievements li::before {
+        width: clamp(2px, 0.5vw, 3px);
+        height: clamp(2px, 0.5vw, 3px);
+        top: clamp(5px, 0.8vw, 6px);
+    }
+} 

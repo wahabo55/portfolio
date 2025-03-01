@@ -1,0 +1,87 @@
+.about-section {
+    min-height: 100vh;
+    padding: 120px 5% 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.terminal-container {
+    width: 90%;
+    max-width: 800px;
+    background: var(--terminal-bg);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px var(--terminal-shadow);
+    overflow: hidden;
+    font-family: var(--font-mono);
+}
+
+.terminal-header {
+    background: var(--terminal-header);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--terminal-border);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-button.close { background: #ff5f56; }
+.terminal-button.minimize { background: #ffbd2e; }
+.terminal-button.expand { background: #27c93f; }
+
+.terminal-title {
+    color: var(--terminal-text);
+    font-size: 14px;
+    margin-left: 20px;
+    opacity: 0.8;
+}
+
+.terminal-body {
+    padding: 20px;
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.terminal-content {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.terminal-content div {
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+}
+
+.command {
+    color: var(--terminal-command);
+}
+
+.output {
+    padding-left: 15px;
+    color: var(--terminal-output);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 100px 20px 40px;
+    }
+    
+    .terminal-container {
+        width: 95%;
+    }
+    
+    .terminal-body {
+        height: 70vh;
+    }
+}
