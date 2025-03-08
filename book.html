@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>السايبرون - Abdulwahab Alshatti</title>
+  <script>
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  </script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    .book-content {
+  direction: rtl;
+  text-align: right;
+}
+
+.book-content .book-hero,
+.book-content .book-meta,
+.book-content .book-description {
+  direction: rtl;
+  text-align: right;
+}
+
+header, nav {
+  direction: ltr;
+  text-align: left;
+}
+    /* Book Page Styling */
+    .book-page {
+      --book-accent-color: #2A5CAA;
+      --section-spacing: 4rem;
+      direction: rtl; /* Added for RTL direction */
+    }
+
+    .book-hero {
+      text-align: center;
+      padding: 3rem 0;
+      background: linear-gradient(45deg, var(--card-bg), var(--background-color));
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    @font-face {
+      font-family: 'TS Safaa';
+      src: url('TS-Safaa-Regular.otf') format('truetype');
+    }
+
+    .book-hero h1 {
+      font-family: 'TS Safaa', sans-serif;
+      font-size: 2.8rem;
+      color: var(--heading-color);
+      font-weight: 700;
+    }
+
+    .book-hero .subtitle {
+      font-family: 'TS Safaa', sans-serif;
+      font-size: 1.4rem;
+      color: var(--text-color);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .book-hero h1 {
+    font-size: 2rem;
+  }
+
+  .book-hero .subtitle {
+    font-size: 1.2rem;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+    .book-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--section-spacing) 2rem;
+    }
+
+    .book-viewer {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card-bg);
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .book-iframe {
+      width: 100%;
+      height: 80vh;
+      min-height: 600px;
+      border: none;
+    }
+
+    .book-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .meta-card {
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .meta-card h3 {
+      color: var(--book-accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .book-description {
+      max-width: 800px;
+      margin: 3rem auto;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .download-btn {
+      background: var(--book-accent-color);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .book-hero h1 {
+        font-size: 2rem;
+      }
+
+      .book-iframe {
+        height: 60vh;
+        min-height: 400px;
+      }
+
+      .book-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="book-page">
+  <div class="elegant-overlay"></div>
+  <div class="grain"></div>
+  <div class="cursor-glow"></div>
+  <div class="main-wrapper">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <a class='logo-text' href='/'>Abdulwahab Alshatti</a>
+      </div>
+      <nav>
+        <div class="togglebtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="navlinks">
+          <li><a href='index.html'>Home</a></li>
+          <li><a href='about.html'>About</a></li>
+          <li><a href='work.html'>Work</a></li>
+          <li><a href='book.html'>eBook</a></li>
+          <li><a href='education.html'>Education</a></li>
+          <li><a href='certifications.html'>Certifications</a></li>
+          <li><a href="#" id="nav-contact">Contact</a></li>
+        </ul>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" />
+          <label for="theme-toggle" class="theme-label">
+              <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+          </label>
+        </div>
+      </nav>
+    </header>
+
+    <main class="book-content">
+        <section class="book-hero">
+          <div class="container">
+            <h1>السايبرون</h1>
+            <p class="subtitle"> حُماة العالم الرقمي </p>
+            <a href="#read" class="scroll-indicator">
+              <i class="fas fa-chevron-down"></i>
+            </a>
+          </div>
+        </section>
+    
+        <section id="read" class="book-viewer">
+          <div class="book-container">
+            <iframe allowfullscreen="allowfullscreen" 
+                    scrolling="no" 
+                    class="book-iframe" 
+                    src="https://heyzine.com/flip-book/e936f20cf4.html">
+            </iframe>
+          </div>
+        </section>
+    
+        <div class="book-meta">
+          <div class="meta-card">
+            <h3>معلومات النشر</h3>
+            <p>تاريخ الإصدار: 2025<br>
+            اللغة: العربية<br>
+            عدد الصفحات: 153</p>
+          </div>
+          
+          <div class="meta-card">
+            <h3>المميزات الرئيسية</h3>
+            <ul>
+              <li>أحدث مفاهيم الأمن السيبراني</li>
+              <li>دراسات حالة عملية</li>
+              <li>إرشادات تقنية مفصلة</li>
+            </ul>
+          </div>
+        </div>
+    
+        <article class="book-description">
+          <h2>عن الكتاب</h2>
+          <p>
+            في عالمٍ مترابطٍ رقميًا، حيث تزداد التهديدات الإلكترونية يومًا بعد يوم، يصبح الأمن السيبراني خط الدفاع الأول لحماية بياناتنا وهوياتنا الرقمية. هذا الكتاب هو دليلك الشامل لاكتشاف أسرار الحماية السيبرانية، حيث يأخذك في رحلة مشوّقة لفهم الهجمات الإلكترونية الأكثر شيوعًا، وأفضل الطرق لتأمين أجهزتك، وحماية خصوصيتك على الإنترنت، سواء كنت فردًا عاديًا أو صاحب مؤسسة.</p>
+<br>
+            <p>
+            سواء كنت مبتدئًا أو مهتمًا بالغوص في عالم الأمن السيبراني، ستجد في هذا الكتاب المعرفة الأساسية التي تحتاجها بأسلوب بسيط وسلس. تعرّف على تقنيات المخترقين وكيفية التصدي لها، واكتشف كيف تحمي نفسك من التصيد الاحتيالي، برامج الفدية، وهجمات القراصنة، مع نصائح عملية تجعلك أكثر وعيًا وأمانًا في العالم الرقمي!
+          </p>
+          <br>
+          <h3>الفوائد الرئيسية</h3>
+          <ul>
+            <li>فهم متعمق للتهديدات السيبرانية الحديثة</li>
+            <li>استراتيجيات فعالة لحماية البنية التحتية الرقمية</li>
+            <li>نماذج عملية لإدارة المخاطر الأمنية</li>
+          </ul>
+        </article>
+    
+          </a>
+        </div>
+      </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
